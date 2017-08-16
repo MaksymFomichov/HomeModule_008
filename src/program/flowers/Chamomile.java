@@ -1,10 +1,12 @@
 package program.flowers;
 
-public class Chamomile extends SuperFlower  {
-    private int price = 70;
+import java.math.BigDecimal;
+
+public class Chamomile extends BaseFlower {
+    private BigDecimal price = new BigDecimal("70.00");
 
     @Override
-    public int getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 }

@@ -2,8 +2,10 @@ package program.store;
 
 import program.flowers.Chamomile;
 import program.flowers.Rose;
-import program.flowers.SuperFlower;
+import program.flowers.BaseFlower;
 import program.flowers.Tulip;
+
+import java.math.BigDecimal;
 
 public class FlowerStore {
     private Purse purse = new Purse();
@@ -14,9 +16,9 @@ public class FlowerStore {
     public FlowerStore() {
     }
 
-    public SuperFlower[] sell(int countRose, int countChamomile, int countTulip) {
-        purse.addPurse(countRose * rose.getPrice() + countChamomile * chamomile.getPrice() + countTulip * tulip.getPrice());
-        SuperFlower[] superFlower = new SuperFlower[countRose + countChamomile + countTulip];
+    public BaseFlower[] sell(int countRose, int countChamomile, int countTulip) {
+        addPurse(countRose, countChamomile, countTulip);
+        BaseFlower[] superFlower = new BaseFlower[countRose + countChamomile + countTulip];
         for (int i = 0; i < countRose; i++) {
             superFlower[i] = rose;
         }
@@ -29,9 +31,9 @@ public class FlowerStore {
         return superFlower;
     }
 
-    public SuperFlower[] sellSequence(int countRose, int countChamomile, int countTulip) {
-        purse.addPurse(countRose * rose.getPrice() + countChamomile * chamomile.getPrice() + countTulip * tulip.getPrice());
-        SuperFlower[] superFlower = new SuperFlower[countRose + countChamomile + countTulip];
+    public BaseFlower[] sellSequence(int countRose, int countChamomile, int countTulip) {
+        addPurse(countRose, countChamomile, countTulip);
+        BaseFlower[] superFlower = new BaseFlower[countRose + countChamomile + countTulip];
         int countFlowers = countRose + countChamomile + countTulip;
         int tempCount = 0;
         while (countFlowers > 0) {
@@ -53,6 +55,10 @@ public class FlowerStore {
             countFlowers--;
         }
         return superFlower;
+    }
+
+    private void addPurse(int countRose, int countChamomile, int countTulip){
+        purse.addPurse(rose.getPrice().multiply(new BigDecimal(countRose)).add(chamomile.getPrice().multiply(new BigDecimal(countChamomile))).add(tulip.getPrice().multiply(new BigDecimal(countTulip))));
     }
 
     public Purse getPurse() {

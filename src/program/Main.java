@@ -1,6 +1,6 @@
 package program;
 
-import program.flowers.SuperFlower;
+import program.flowers.BaseFlower;
 import program.store.FlowerStore;
 import program.work.FlowersLoader;
 import program.work.FlowersSaver;
@@ -13,10 +13,10 @@ public class Main {
     public static void main(String[] args) {
         FlowerStore flowerStore = new FlowerStore();
         // проверяем метод sell из класса FlowerStore
-        SuperFlower[] flowersSell = flowerStore.sell(2, 2, 2);
+        BaseFlower[] flowersSell = flowerStore.sell(2, 2, 2);
         showFlowers(flowersSell);
         // проверяем метод sellSequence из класса FlowerStore
-        SuperFlower[] flowersSellSequence = flowerStore.sellSequence(5, 3, 1);
+        BaseFlower[] flowersSellSequence = flowerStore.sellSequence(5, 3, 1);
         showFlowers(flowersSellSequence);
 
         // выводим текущее стостояние кошелька
@@ -31,9 +31,9 @@ public class Main {
     }
 
     // вывод массива обьектов (имена классов) через запятую
-    private static void showFlowers(SuperFlower[] flowers) {
+    private static void showFlowers(BaseFlower[] flowers) {
         List<String> container = new ArrayList<>();
-        for (SuperFlower flower : flowers) {
+        for (BaseFlower flower : flowers) {
             container.add(flower.getClass().getSimpleName());
         }
         System.out.println(String.join(", ", container));
